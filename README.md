@@ -1,4 +1,4 @@
-# ReactAppBoughtItemsChart
+# MyItemsChart
 Application wich write down your spendings and presents in chart form
 
 Technologies, that were used:
