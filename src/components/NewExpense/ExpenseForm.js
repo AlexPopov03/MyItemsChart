@@ -2,33 +2,25 @@ import React, { useState } from 'react';
 
 import './ExpenseForm.css';
 
-const ExpenseForm = (props) => {
+const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
 
-  const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-  };
-
-  const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
-  };
-
-  const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
-  };
+  const titleChangeHandler = (event) => setEnteredTitle(event.target.value);
+  const amountChangeHandler = (event) => setEnteredAmount(event.target.value);
+  const dateChangeHandler = (event) => setEnteredDate(event.target.value);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: Number(enteredAmount),
       date: new Date(enteredDate),
     };
 
-    props.onSaveExpenseData(expenseData);
+    onSaveExpenseData(expenseData);
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
@@ -60,14 +52,14 @@ const ExpenseForm = (props) => {
           <input
             type='date'
             min='2019-01-01'
-            max='2023-12-31'
+            max='3000-12-31'
             value={enteredDate}
             onChange={dateChangeHandler}
           />
         </div>
       </div>
       <div className='new-expense__actions'>
-        <button type="button" onClick={props.onCancel}>Cancel</button>
+        <button type='button' onClick={onCancel}>Cancel</button>
         <button type='submit'>Add Expense</button>
       </div>
     </form>
